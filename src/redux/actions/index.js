@@ -4,7 +4,7 @@ export const PEGA_API = 'PEGA_API';
 
 export const pegaEmail = (payload) => ({
   type: PEGA_EMAIL,
-  currencies: payload,
+  payload,
 });
 
 const inicialRequest = () => ({ type: INICIAL_REQ });
