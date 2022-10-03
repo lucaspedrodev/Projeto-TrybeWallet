@@ -12,9 +12,9 @@ class Header extends Component {
           {
             despesas.reduce((acc, current) => {
               const valor = Number(current.exchangeRates[current.currency].ask);
-              const valorTotal = Number((valor * current.value).toFixed(2));
-              return (acc + valorTotal);
-            }, 0)
+              const valorTotal = Number((valor * current.value));
+              return ((acc + valorTotal));
+            }, 0).toFixed(2)
           }
         </p>
         <p data-testid="header-currency-field"> BRL </p>

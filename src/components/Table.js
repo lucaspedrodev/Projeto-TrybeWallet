@@ -1,8 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { attbtn } from '../redux/actions';
 
 class Table extends Component {
+  handleClick = (id) => {
+    const { expenses, atualiza } = this.props;
+    const filtro = expenses.filter((el) => el.id !== id);
+    atualiza(filtro);
+  };
+
   render() {
     const { expenses } = this.props;
     return (
@@ -21,8 +28,8 @@ class Table extends Component {
           </tr>
         </thead>
         <tbody>
-          {expenses.map((el, i) => (
-            <tr key={ el.id[[i]] }>
+          {expenses.map((el) => (
+            <tr value={ el.id } key={ el.id }>
               <td>{el.description}</td>
               <td>{el.tag}</td>
               <td>{el.method}</td>
@@ -33,6 +40,23 @@ class Table extends Component {
                 {Number((el.exchangeRates[el.currency].ask * el.value).toFixed(2))}
               </td>
               <td>Real</td>
+              <td>
+                <button
+                  type="button"
+                  data-testid="edit-btn"
+
+                >
+                  Editar
+                </button>
+                <button
+                  type="button"
+                  data-testid="delete-btn"
+                  onClick={ () => this.handleClick(el.id) }
+                >
+                  Excluir
+                </button>
+              </td>
+
             </tr>
           ))}
         </tbody>
@@ -47,7 +71,11 @@ Table.propTypes = {
   }),
 }.toFixed;
 
+const mapDispatchToProps = (dispatch) => ({
+  atualiza: (payload) => dispatch(attbtn(payload)),
+});
+
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
-export default connect(mapStateToProps)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

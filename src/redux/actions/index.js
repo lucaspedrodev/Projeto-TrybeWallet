@@ -2,6 +2,7 @@ export const PEGA_EMAIL = 'PEGA_EMAIL';
 export const INICIAL_REQ = 'INICIAL_REQ';
 export const PEGA_API = 'PEGA_API';
 export const PEGA_GASTOS = 'PEGA_GASTOS';
+export const ATUALIZA_BTN = 'ATUALIZA_BTN';
 
 export const pegaEmail = (payload) => ({
   type: PEGA_EMAIL,
@@ -27,3 +28,5 @@ export const getRequestExpencies = (payload) => async (dispatch) => {
   const result = await response.json();
   return dispatch(pegaGastos({ ...payload, exchangeRates: result }));
 };
+
+export const attbtn = (payload) => ({ type: ATUALIZA_BTN, payload });
