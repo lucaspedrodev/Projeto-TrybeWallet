@@ -1,7 +1,8 @@
-import { INICIAL_REQ, PEGA_API } from '../actions';
+import { INICIAL_REQ, PEGA_API, PEGA_GASTOS } from '../actions';
 
 const INICIAL_STATE = {
   currencies: [],
+  expenses: [],
 
 };
 
@@ -13,6 +14,11 @@ const wallet = (state = INICIAL_STATE, action) => {
     return {
       ...state,
       currencies: action.payload,
+    };
+  case PEGA_GASTOS:
+    return {
+      ...state,
+      expenses: [...state.expenses, action.payload],
     };
   default:
     return state;
